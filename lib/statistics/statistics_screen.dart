@@ -23,8 +23,9 @@ class StatisticsScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(),
+            Image.asset('assets/images/empty.png'),
           ],
         ),
       ),
