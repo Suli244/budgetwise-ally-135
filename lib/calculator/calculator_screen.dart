@@ -7,20 +7,26 @@ class CalculatorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Calculator',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 26.h,
-            fontWeight: FontWeight.w700,
+        title: Padding(
+          padding: EdgeInsets.only(left: 5.w),
+          child: Text(
+            'Calculator',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 26.h,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
         centerTitle: false,
       ),
-      body: Column(
-        children: [
-          Container(),
-        ],
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Column(
+          children: [
+            Container(),
+          ],
+        ),
       ),
     );
   }

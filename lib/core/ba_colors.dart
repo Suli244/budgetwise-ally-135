@@ -10,6 +10,7 @@ abstract class BaColors {
   static const Color grey555555 = Color(0xff555555);
   static const Color grey636366 = Color(0xff636366);
   static const Color grey5b5b5b = Color(0xff5b5b5b);
+  static const Color grey1c1c1c = Color(0xff1c1c1c);
   static const Color redFF5252 = Color(0xffFF5252);
   static const Color redB91D1D = Color(0xffB91D1D);
   static const Color blue525DFF = Color(0xff525DFF);
