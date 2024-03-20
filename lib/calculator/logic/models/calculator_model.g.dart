@@ -19,37 +19,22 @@ class CalculatorHiveModelAdapter extends TypeAdapter<CalculatorHiveModel> {
     return CalculatorHiveModel(
       id: fields[0] as int,
       title: fields[1] as String,
-      podhod: fields[2] as int,
-      povtor: fields[3] as int,
-      masStaryad: fields[4] as int,
-      dayWeek: fields[5] as int,
-      exerciseStatus: fields[6] as String,
-      photo: fields[7] as String,
-      date: fields[8] as DateTime,
+      sum: fields[2] as double,
+      date: fields[3] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, CalculatorHiveModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.podhod)
+      ..write(obj.sum)
       ..writeByte(3)
-      ..write(obj.povtor)
-      ..writeByte(4)
-      ..write(obj.masStaryad)
-      ..writeByte(5)
-      ..write(obj.dayWeek)
-      ..writeByte(6)
-      ..write(obj.exerciseStatus)
-      ..writeByte(7)
-      ..write(obj.photo)
-      ..writeByte(8)
       ..write(obj.date);
   }
 

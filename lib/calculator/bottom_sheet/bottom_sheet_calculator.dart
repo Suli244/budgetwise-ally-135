@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future bottomShetCalcu(BuildContext context) {
+  TextEditingController controller = TextEditingController();
   return showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -55,6 +56,7 @@ Future bottomShetCalcu(BuildContext context) {
                 SizedBox(height: 15.h),
                 const Divider(thickness: 1, color: BaColors.grey333333),
                 TextField(
+                  controller: controller,
                   style: TextStyle(
                     fontSize: 40.h,
                     fontWeight: FontWeight.w700,
@@ -90,7 +92,10 @@ Future bottomShetCalcu(BuildContext context) {
                 ),
                 BaMotion(
                   onPressed: () async {
-                    await bottomShetConfirmCalcu(context);
+                    if (controller.text.isNotEmpty) {
+                      Navigator.pop(context);
+                      await bottomShetConfirmCalcu(context, controller.text);
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(
