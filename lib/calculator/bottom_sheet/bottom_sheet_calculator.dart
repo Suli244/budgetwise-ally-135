@@ -6,9 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Future bottomShetCalcu(BuildContext context) {
+Future<void> bottomShetCalcu(BuildContext context) async {
   TextEditingController controller = TextEditingController();
-  return showModalBottomSheet(
+  await showModalBottomSheet(
     isScrollControlled: true,
     context: context,
     builder: (context) {

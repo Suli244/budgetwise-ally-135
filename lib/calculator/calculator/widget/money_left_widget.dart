@@ -1,4 +1,3 @@
-import 'package:budgetwise_ally_135/calculator/budget/budget.dart';
 import 'package:budgetwise_ally_135/core/ba_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,27 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MoneyLeftWidget extends StatefulWidget {
   const MoneyLeftWidget({
     super.key,
+    required this.sum,
+    required this.sum2,
   });
-
+  final double sum;
+  final double sum2;
   @override
   State<MoneyLeftWidget> createState() => _MoneyLeftWidgetState();
 }
 
 class _MoneyLeftWidgetState extends State<MoneyLeftWidget> {
-  double moneyLeft = 0;
-  @override
-  void initState() {
-    svnsv();
-    super.initState();
-  }
-
-  Future<void> svnsv() async {
-    double moneyLeftawait = await getBudgetUblndvd();
-    setState(() {
-      moneyLeft = moneyLeftawait;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,7 +40,7 @@ class _MoneyLeftWidgetState extends State<MoneyLeftWidget> {
                 ),
                 const Spacer(),
                 Text(
-                  moneyLeft
+                  widget.sum
                       .toStringAsFixed(2)
                       .replaceAll(RegExp(r"(\.0*|0*)$"), ""),
                   style: TextStyle(
@@ -80,7 +68,9 @@ class _MoneyLeftWidgetState extends State<MoneyLeftWidget> {
                 ),
                 const Spacer(),
                 Text(
-                  '0',
+                   widget.sum2
+                      .toStringAsFixed(2)
+                      .replaceAll(RegExp(r"(\.0*|0*)$"), ""),
                   style: TextStyle(
                     color: BaColors.redFF5252,
                     fontSize: 18.h,
