@@ -7,6 +7,7 @@ import 'package:budgetwise_ally_135/core/ba_motin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Budget extends StatefulWidget {
   const Budget({super.key});
@@ -16,11 +17,9 @@ class Budget extends StatefulWidget {
 }
 
 class _BudgetState extends State<Budget> {
-  final TextEditingController controller = TextEditingController();
   int? highlightedButtonIndex;
   String inputString = '';
   double usdValue = 0;
-
 
   void _updateConversion() {
     double value = double.tryParse(inputString) ?? 0.0;
@@ -157,31 +156,38 @@ class _BudgetState extends State<Budget> {
               ],
             ),
             const Spacer(),
-          usdValue!=0?  Center(
-              child: BaMotion(
-                onPressed: () {
-                  bottomShet(context);
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100).r,
-                    color: BaColors.blue525DFF,
-                  ),
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 35.w),
-                    child: Text(
-                      'Confirm Budget',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.h,
-                        fontWeight: FontWeight.w700,
+            usdValue != 0
+                ? Center(
+                    child: BaMotion(
+                      onPressed: () async {
+                        if (usdValue != 0) {
+                          await bottomShet(context, usdValue);
+                          setState(() {
+                            usdValue = 0;
+                          });
+                        }
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100).r,
+                          color: BaColors.blue525DFF,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 18.h, horizontal: 35.w),
+                          child: Text(
+                            'Confirm Budget',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.h,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-            ):const SizedBox(),
+                  )
+                : const SizedBox(),
             SizedBox(height: 16.h),
             GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -211,4 +217,14 @@ class _BudgetState extends State<Budget> {
       ),
     );
   }
+}
+
+Future<double> getBudgetUblndvd() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getDouble('BudgetUblndvd') ?? 0;
+}
+
+Future<void> setBudgetUblndvd(double budgetUblndvd) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setDouble('BudgetUblndvd', budgetUblndvd);
 }

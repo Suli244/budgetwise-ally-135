@@ -1,15 +1,31 @@
+import 'package:budgetwise_ally_135/calculator/budget/budget.dart';
 import 'package:budgetwise_ally_135/core/ba_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MoneyLeftWidget extends StatelessWidget {
+class MoneyLeftWidget extends StatefulWidget {
   const MoneyLeftWidget({
     super.key,
-    required this.moneyLeft,
-    required this.summaryExpense,
   });
-  final String moneyLeft;
-  final String summaryExpense;
+
+  @override
+  State<MoneyLeftWidget> createState() => _MoneyLeftWidgetState();
+}
+
+class _MoneyLeftWidgetState extends State<MoneyLeftWidget> {
+  double moneyLeft = 0;
+  @override
+  void initState() {
+    svnsv();
+    super.initState();
+  }
+
+  Future<void> svnsv() async {
+    double moneyLeftawait = await getBudgetUblndvd();
+    setState(() {
+      moneyLeft = moneyLeftawait;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +52,9 @@ class MoneyLeftWidget extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  moneyLeft,
+                  moneyLeft
+                      .toStringAsFixed(2)
+                      .replaceAll(RegExp(r"(\.0*|0*)$"), ""),
                   style: TextStyle(
                     color: BaColors.green52FF63,
                     fontSize: 18.h,
@@ -62,7 +80,7 @@ class MoneyLeftWidget extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  summaryExpense,
+                  '0',
                   style: TextStyle(
                     color: BaColors.redFF5252,
                     fontSize: 18.h,

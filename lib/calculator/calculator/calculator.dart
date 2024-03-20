@@ -47,10 +47,7 @@ class _CalculatorState extends State<Calculator> {
         padding: EdgeInsets.only(bottom: 20.h),
         child: const Column(
           children: [
-            MoneyLeftWidget(
-              moneyLeft: '2 446 65\$',
-              summaryExpense: '-2 446 65\$',
-            ),
+            MoneyLeftWidget(),
             ToDayWidget(
               title: 'TODAY',
               timeOne: '10:00 AM',
