@@ -1,3 +1,4 @@
+import 'package:budgetwise_ally_135/premium/premium_screen.dart';
 import 'package:budgetwise_ally_135/settings/widget/settings_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,16 @@ class SettingsScreen extends StatelessWidget {
           children: [
             SetItWid(
               text: 'Get Premium',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PremiumScreen(
+                      isClose: true,
+                    ),
+                  ),
+                );
+              },
               isIcon: false,
             ),
             SizedBox(height: 16.h),
