@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Future<void> bottomShetCalcu(BuildContext context) async {
+Future<void> bottomShetCalcu(BuildContext context, ValueChanged onTtt) async {
   TextEditingController controller = TextEditingController();
   await showModalBottomSheet(
     isScrollControlled: true,
@@ -93,8 +93,9 @@ Future<void> bottomShetCalcu(BuildContext context) async {
                 BaMotion(
                   onPressed: () async {
                     if (controller.text.isNotEmpty) {
+                      await bottomShetConfirmCalcu(
+                          context, controller.text, onTtt);
                       Navigator.pop(context);
-                      await bottomShetConfirmCalcu(context, controller.text);
                     }
                   },
                   child: Container(

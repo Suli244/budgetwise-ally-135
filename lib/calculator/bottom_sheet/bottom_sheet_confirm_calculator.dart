@@ -9,13 +9,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:budgetwise_ally_135/core/ba_colors.dart';
 import 'package:budgetwise_ally_135/core/ba_motin.dart';
 
-Future bottomShetConfirmCalcu(BuildContext context, String text) {
+Future bottomShetConfirmCalcu(
+    BuildContext context, String text, ValueChanged onTtt) {
   return showModalBottomSheet(
     isScrollControlled: true,
     context: context,
     builder: (context) {
       return ShowCal(
         text: text,
+        onTtt: onTtt,
       );
     },
   );
@@ -25,8 +27,10 @@ class ShowCal extends StatefulWidget {
   const ShowCal({
     super.key,
     required this.text,
+    required this.onTtt,
   });
   final String text;
+  final ValueChanged onTtt;
   @override
   State<ShowCal> createState() => _ShowCalState();
 }
@@ -40,6 +44,7 @@ class _ShowCalState extends State<ShowCal> {
         listener: (context, state) {
           if (state is Success) {
             Navigator.pop(context);
+            widget.onTtt('');
           } else if (state is Error) {
             final errorMessage = state.error;
             ScaffoldMessenger.of(context).showSnackBar(

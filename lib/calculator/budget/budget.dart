@@ -76,6 +76,7 @@ class _BudgetState extends State<Budget> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(360, 890));
     return AppUnfocuser(
       child: Scaffold(
         body: Column(
@@ -90,40 +91,6 @@ class _BudgetState extends State<Budget> {
                 color: BaColors.grey636366,
               ),
             ),
-            // TextField(
-            // style: TextStyle(
-            //   fontSize: 40.h,
-            //   fontWeight: FontWeight.w700,
-            //   height: 0,
-            //   color: BaColors.whate,
-            // ),
-            //   cursorColor: BaColors.blue525DFF,
-            //   cursorWidth: 6,
-            //   cursorHeight: 40.h,
-            //   cursorRadius: const Radius.circular(0),
-            //   strutStyle: const StrutStyle(
-            //     forceStrutHeight: true,
-            //     height: 1.05,
-            //   ),
-            //   maxLength: 10,
-            //   keyboardType: TextInputType.number,
-            //   decoration: InputDecoration(
-            //     counterText: '',
-            //     hintText: '0',
-            //     hintStyle: TextStyle(
-            //       fontSize: 40.h,
-            //       fontWeight: FontWeight.w700,
-            //       height: 0,
-            //       color: BaColors.grey888888,
-            //     ),
-            //     prefixIcon: Icon(
-            //       CupertinoIcons.money_dollar,
-            //       size: 48.h,
-            //       color: Colors.white,
-            //     ),
-            //     border: InputBorder.none,
-            //   ),
-            // ),
             SizedBox(height: 16.h),
             Row(
               children: [
@@ -168,6 +135,7 @@ class _BudgetState extends State<Budget> {
                         }
                       },
                       child: Container(
+                        height: 61.h,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100).r,
                           color: BaColors.blue525DFF,
@@ -187,13 +155,12 @@ class _BudgetState extends State<Budget> {
                       ),
                     ),
                   )
-                : const SizedBox(),
+                : SizedBox(height: 61.h),
             SizedBox(height: 16.h),
             GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: 12,
-              // padding: const EdgeInsets.symmetric(horizontal: 20),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 mainAxisSpacing: 5,
@@ -201,13 +168,17 @@ class _BudgetState extends State<Budget> {
                 mainAxisExtent: 68,
               ),
               itemBuilder: (context, index) {
-                String label = index == 9
-                    ? '.'
-                    : index == 10
-                        ? '0'
-                        : index == 11
-                            ? '<-'
-                            : '$index';
+                String label;
+                if (index < 9) {
+                  label = '${index + 1}';
+                } else if (index == 9) {
+                  label = '.';
+                } else if (index == 10) {
+                  label = '0';
+                } else {
+                  label = '<-';
+                }
+
                 return _buildKeyPadButton(label, index);
               },
             ),
