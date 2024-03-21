@@ -68,7 +68,7 @@ class _MoneyLeftWidgetState extends State<MoneyLeftWidget> {
                 ),
                 const Spacer(),
                 Text(
-                   widget.sum2
+                  widget.sum2
                       .toStringAsFixed(2)
                       .replaceAll(RegExp(r"(\.0*|0*)$"), ""),
                   style: TextStyle(

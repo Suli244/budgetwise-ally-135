@@ -11,10 +11,7 @@ class BaBottomBarState extends State<BaBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: isActive,
-        children: _pages,
-      ),
+      body: _pages[isActive],
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(
           top: 18.r,

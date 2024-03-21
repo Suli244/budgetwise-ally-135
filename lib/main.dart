@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
           title: 'BudgetWise Ally',
           home: child,
           theme: ThemeData(
+            fontFamily: 'SFProDisplay',
             splashColor: Colors.transparent,
             splashFactory: NoSplash.splashFactory,
             highlightColor: Colors.transparent,
