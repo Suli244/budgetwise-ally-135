@@ -2,15 +2,19 @@ import 'package:budgetwise_ally_135/core/ba_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MoneyLeftWidget extends StatelessWidget {
+class MoneyLeftWidget extends StatefulWidget {
   const MoneyLeftWidget({
     super.key,
-    required this.moneyLeft,
-    required this.summaryExpense,
+    required this.sum,
+    required this.sum2,
   });
-  final String moneyLeft;
-  final String summaryExpense;
+  final double sum;
+  final double sum2;
+  @override
+  State<MoneyLeftWidget> createState() => _MoneyLeftWidgetState();
+}
 
+class _MoneyLeftWidgetState extends State<MoneyLeftWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +40,9 @@ class MoneyLeftWidget extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  moneyLeft,
+                  widget.sum
+                      .toStringAsFixed(2)
+                      .replaceAll(RegExp(r"(\.0*|0*)$"), ""),
                   style: TextStyle(
                     color: BaColors.green52FF63,
                     fontSize: 18.h,
@@ -62,7 +68,9 @@ class MoneyLeftWidget extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  summaryExpense,
+                   widget.sum2
+                      .toStringAsFixed(2)
+                      .replaceAll(RegExp(r"(\.0*|0*)$"), ""),
                   style: TextStyle(
                     color: BaColors.redFF5252,
                     fontSize: 18.h,

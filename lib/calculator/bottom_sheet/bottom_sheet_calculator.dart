@@ -6,8 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Future bottomShetCalcu(BuildContext context) {
-  return showModalBottomSheet(
+Future<void> bottomShetCalcu(BuildContext context, ValueChanged onTtt) async {
+  TextEditingController controller = TextEditingController();
+  await showModalBottomSheet(
     isScrollControlled: true,
     context: context,
     builder: (context) {
@@ -55,6 +56,7 @@ Future bottomShetCalcu(BuildContext context) {
                 SizedBox(height: 15.h),
                 const Divider(thickness: 1, color: BaColors.grey333333),
                 TextField(
+                  controller: controller,
                   style: TextStyle(
                     fontSize: 40.h,
                     fontWeight: FontWeight.w700,
@@ -90,7 +92,11 @@ Future bottomShetCalcu(BuildContext context) {
                 ),
                 BaMotion(
                   onPressed: () async {
-                    await bottomShetConfirmCalcu(context);
+                    if (controller.text.isNotEmpty) {
+                      await bottomShetConfirmCalcu(
+                          context, controller.text, onTtt);
+                      Navigator.pop(context);
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(
