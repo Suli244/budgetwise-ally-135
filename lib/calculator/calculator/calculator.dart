@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:budgetwise_ally_135/calculator/bottom_sheet/bottom_sheet_calculator.dart';
 import 'package:budgetwise_ally_135/calculator/budget/budget.dart';
 import 'package:budgetwise_ally_135/calculator/calculator/widget/money_left_widget.dart';
@@ -19,11 +21,32 @@ class Calculator extends StatefulWidget {
 
 class _CalculatorState extends State<Calculator> {
   double moneyLeft = 0;
+  StreamSubscription<GetCalculatorState>? _calculatorSubscription;
+
   @override
   void initState() {
+    super.initState();
     svnsv();
     context.read<GetCalculatorCubit>().getAllCalculatorList();
-    super.initState();
+
+    _calculatorSubscription =
+        context.read<GetCalculatorCubit>().stream.listen((state) {
+      if (state is Success) {
+        double totalExpenses =
+            state.calculatorList.fold(0, (sum, event) => sum + event.sum);
+        if (mounted) {
+          setState(() {
+            moneyLeft -= totalExpenses;
+          });
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _calculatorSubscription?.cancel();
+    super.dispose();
   }
 
   Future<void> svnsv() async {
@@ -44,6 +67,12 @@ class _CalculatorState extends State<Calculator> {
       totalSumByDate[date] = totalSum;
     });
     return totalSumByDate;
+  }
+
+  Future<void> addExpenseAndUpdateMoneyLeft() async {
+    await bottomShetCalcu(context);
+
+    context.read<GetCalculatorCubit>().getAllCalculatorList();
   }
 
   @override
@@ -175,8 +204,7 @@ class _CalculatorState extends State<Calculator> {
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: BaMotion(
           onPressed: () async {
-            await bottomShetCalcu(context);
-            context.read<GetCalculatorCubit>().getAllCalculatorList();
+            await addExpenseAndUpdateMoneyLeft();
           },
           child: Container(
             decoration: BoxDecoration(
