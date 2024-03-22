@@ -1,8 +1,14 @@
+import 'dart:developer';
+
 import 'package:budgetwise_ally_135/core/ba_colors.dart';
 import 'package:budgetwise_ally_135/core/ba_motin.dart';
 import 'package:budgetwise_ally_135/core/con_bar.dart';
+import 'package:budgetwise_ally_135/core/urls.dart';
 import 'package:budgetwise_ally_135/premium/widget/premium_item_widget.dart';
 import 'package:budgetwise_ally_135/premium/widget/rest_wid.dart';
+import 'package:budgetwise_ally_135/settings/budgetwise_ally_adapsas.dart';
+import 'package:budgetwise_ally_135/settings/budgetwise_ally_premsas.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,6 +20,18 @@ class PremiumScreen extends StatefulWidget {
 }
 
 class _PremiumScreenState extends State<PremiumScreen> {
+  Future<void> budgetwiseAllyPurchase() async {
+    final budgetwiseAllyPaywall = await BudgetwiseAllyAdapty().budgetwiseAllyGetPaywall(DocFF.vsbsda);
+    if (budgetwiseAllyPaywall == null) return;
+    final budgetwiseAllyProducts =
+        await BudgetwiseAllyAdapty().budgetwiseAllyGetPaywallProducts(budgetwiseAllyPaywall);
+    if (budgetwiseAllyProducts == null) return;
+    if (kDebugMode) log('BudgetwiseAlly');
+
+    await BudgetwiseAllyAdapty().budgetwiseAllyMakePurchase(budgetwiseAllyProducts.first);
+  }
+
+  bool qwopjfivnkasvjbds = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +69,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 ),
                 const Spacer(),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    restoreBudgetwiseAllyPhbcsdcqq(context);
+                  },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -110,16 +130,23 @@ class _PremiumScreenState extends State<PremiumScreen> {
           ),
           SizedBox(height: 35.h),
           BaMotion(
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const BaBottomBar(
-                    indexScr: 0,
+            onPressed: () async {
+              setState(() => qwopjfivnkasvjbds = true);
+              await budgetwiseAllyPurchase();
+              final hasPremiumStatusSmartTrader =
+                  await BudgetwiseAllyAdapty().budgetwiseAllyHasPremiumStatus();
+              if (hasPremiumStatusSmartTrader) {
+                await setBudgetwiseAllyPhbcsdcqq();
+                // ignore: use_build_context_synchronously
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const BaBottomBar(),
                   ),
-                ),
-                (protected) => false,
-              );
+                  (route) => false,
+                );
+              }
+              setState(() => qwopjfivnkasvjbds = false);
             },
             child: Container(
               decoration: BoxDecoration(

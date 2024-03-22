@@ -1,6 +1,8 @@
 import 'package:budgetwise_ally_135/calculator/calculator_screen.dart';
 import 'package:budgetwise_ally_135/core/ba_colors.dart';
 import 'package:budgetwise_ally_135/core/ba_motin.dart';
+import 'package:budgetwise_ally_135/premium/premium_screen.dart';
+import 'package:budgetwise_ally_135/settings/budgetwise_ally_premsas.dart';
 import 'package:budgetwise_ally_135/settings/settings_screen.dart';
 import 'package:budgetwise_ally_135/statistics/statistics_screen.dart';
 import 'package:flutter/material.dart';
@@ -49,30 +51,50 @@ class BaBottomBarState extends State<BaBottomBar> {
                 ],
               ),
             ),
-            BaMotion(
-              onPressed: () => setState(() => isActive = 1),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/statistics.svg',
-                    color: isActive == 1 ? null : BaColors.grey555555,
-                    width: 22.w,
+            FutureBuilder(
+              future: getBudgetwiseAllyPhbcsdcqq(),
+              builder: (context, snapshot) {
+                return BaMotion(
+                  onPressed: () {
+                    if (snapshot.hasData && !snapshot.data!) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PremiumScreen(
+                            isClose: true,
+                          ),
+                        ),
+                      );
+                    } else {
+                      setState(() {
+                        isActive = 1;
+                      });
+                    }
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/statistics.svg',
+                        color: isActive == 1 ? null : BaColors.grey555555,
+                        width: 22.w,
+                      ),
+                      SizedBox(height: 6.h),
+                      Text(
+                        'Statistics',
+                        style: TextStyle(
+                          color: isActive == 1
+                              ? BaColors.blue525DFF
+                              : BaColors.grey5b5b5b,
+                          fontSize: 14.h,
+                          height: 0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 6.h),
-                  Text(
-                    'Statistics',
-                    style: TextStyle(
-                      color: isActive == 1
-                          ? BaColors.blue525DFF
-                          : BaColors.grey5b5b5b,
-                      fontSize: 14.h,
-                      height: 0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
+                );
+              },
             ),
             BaMotion(
               onPressed: () => setState(() => isActive = 2),
