@@ -47,43 +47,68 @@ class _StatDetaeleState extends State<StatDetaele> {
               children: [
                 SizedBox(height: 32.h),
                 Stack(
+                  alignment: AlignmentDirectional.center,
                   children: [
                     Image.asset(
                       'assets/images/graphicImage.png',
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.r,
-                        vertical: 8.r,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Color(0xff151515),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(16),
-                          topRight: Radius.circular(16),
-                          bottomLeft: Radius.circular(16),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${widget.exp.toStringAsFixed(2).replaceAll(RegExp(r"(\.0*|0*)$"), "")}\$',
-                            style: TextStyle(
-                              fontSize: 16.h,
-                              fontWeight: FontWeight.w800,
-                              color: const Color(0xffFF5252),
-                            ),
+                    Column(
+                      children: [
+                        Text(
+                          'Budget',
+                          style: TextStyle(
+                            fontSize: 16.h,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xff999999),
                           ),
-                          Text(
-                            'Expense',
-                            style: TextStyle(
-                              fontSize: 12.h,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
+                        ),
+                        Text(
+                          '${widget.budget.toStringAsFixed(2).replaceAll(RegExp(r"(\.0*|0*)$"), "")}\$',
+                          style: TextStyle(
+                            fontSize: 18.h,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.r,
+                          vertical: 8.r,
+                        ),
+                        decoration: const BoxDecoration(
+                          color: Color(0xff151515),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                            bottomLeft: Radius.circular(16),
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${widget.exp.toStringAsFixed(2).replaceAll(RegExp(r"(\.0*|0*)$"), "")}\$',
+                              style: TextStyle(
+                                fontSize: 16.h,
+                                fontWeight: FontWeight.w800,
+                                color: const Color(0xffFF5252),
+                              ),
                             ),
-                          )
-                        ],
+                            Text(
+                              'Expense',
+                              style: TextStyle(
+                                fontSize: 12.h,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Positioned(
