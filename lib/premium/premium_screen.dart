@@ -8,6 +8,7 @@ import 'package:budgetwise_ally_135/premium/widget/premium_item_widget.dart';
 import 'package:budgetwise_ally_135/premium/widget/rest_wid.dart';
 import 'package:budgetwise_ally_135/settings/budgetwise_ally_adapsas.dart';
 import 'package:budgetwise_ally_135/settings/budgetwise_ally_premsas.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,14 +22,16 @@ class PremiumScreen extends StatefulWidget {
 
 class _PremiumScreenState extends State<PremiumScreen> {
   Future<void> budgetwiseAllyPurchase() async {
-    final budgetwiseAllyPaywall = await BudgetwiseAllyAdapty().budgetwiseAllyGetPaywall(DocFF.vsbsda);
+    final budgetwiseAllyPaywall =
+        await BudgetwiseAllyAdapty().budgetwiseAllyGetPaywall(DocFF.vsbsda);
     if (budgetwiseAllyPaywall == null) return;
-    final budgetwiseAllyProducts =
-        await BudgetwiseAllyAdapty().budgetwiseAllyGetPaywallProducts(budgetwiseAllyPaywall);
+    final budgetwiseAllyProducts = await BudgetwiseAllyAdapty()
+        .budgetwiseAllyGetPaywallProducts(budgetwiseAllyPaywall);
     if (budgetwiseAllyProducts == null) return;
     if (kDebugMode) log('BudgetwiseAlly');
 
-    await BudgetwiseAllyAdapty().budgetwiseAllyMakePurchase(budgetwiseAllyProducts.first);
+    await BudgetwiseAllyAdapty()
+        .budgetwiseAllyMakePurchase(budgetwiseAllyProducts.first);
   }
 
   bool qwopjfivnkasvjbds = false;
@@ -149,25 +152,28 @@ class _PremiumScreenState extends State<PremiumScreen> {
               setState(() => qwopjfivnkasvjbds = false);
             },
             child: Container(
-              decoration: BoxDecoration(
-                color: BaColors.blue525DFF,
-                borderRadius: BorderRadius.circular(100.r),
-              ),
-              child: Padding(
+                width: 279.w,
+                height: 65.h,
                 padding: EdgeInsets.symmetric(
                   vertical: 20.h,
                   horizontal: 60.w,
                 ),
-                child: Text(
-                  'Buy Premium \$0.99',
-                  style: TextStyle(
-                    color: BaColors.whate,
-                    fontSize: 18.h,
-                    fontWeight: FontWeight.w600,
-                  ),
+                decoration: BoxDecoration(
+                  color: BaColors.blue525DFF,
+                  borderRadius: BorderRadius.circular(100.r),
                 ),
-              ),
-            ),
+                child: Center(
+                  child: qwopjfivnkasvjbds
+                      ? const CupertinoActivityIndicator(color: Colors.white)
+                      : Text(
+                          'Buy Premium \$0.99',
+                          style: TextStyle(
+                            color: BaColors.whate,
+                            fontSize: 18.h,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                )),
           ),
           SizedBox(height: 23.h),
           RestBut(

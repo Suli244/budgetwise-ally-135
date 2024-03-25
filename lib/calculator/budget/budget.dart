@@ -75,11 +75,12 @@ class _BudgetState extends State<Budget> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(360, 890));
-    return AppUnfocuser(
-      child: Scaffold(
-        body: Column(
+Widget build(BuildContext context) {
+  // ScreenUtil.init(context, designSize: const Size(360, 890));
+  return AppUnfocuser(
+    child: Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -122,7 +123,8 @@ class _BudgetState extends State<Budget> {
                 ),
               ],
             ),
-            const Spacer(),
+            SizedBox(height: 69.h),
+            // const Spacer(),
             usdValue != 0
                 ? Center(
                     child: BaMotion(
@@ -178,7 +180,6 @@ class _BudgetState extends State<Budget> {
                 } else {
                   label = '<-';
                 }
-
                 return _buildKeyPadButton(label, index);
               },
             ),
@@ -186,8 +187,9 @@ class _BudgetState extends State<Budget> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
 
 Future<double> getBudgetUblndvd() async {

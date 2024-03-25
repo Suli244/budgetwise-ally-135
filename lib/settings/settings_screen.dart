@@ -1,3 +1,5 @@
+import 'package:budgetwise_ally_135/core/urls.dart';
+import 'package:budgetwise_ally_135/core/web_view_plink.dart';
 import 'package:budgetwise_ally_135/premium/premium_screen.dart';
 import 'package:budgetwise_ally_135/settings/budgetwise_ally_premsas.dart';
 import 'package:budgetwise_ally_135/settings/widget/settings_item_widget.dart';
@@ -8,7 +10,7 @@ class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(360, 890));
+    // ScreenUtil.init(context, designSize: const Size(360, 890));
     return Scaffold(
       appBar: AppBar(
         title: Padding(
@@ -56,17 +58,47 @@ class SettingsScreen extends StatelessWidget {
                 }),
             SetItWid(
               text: 'Privacy Policy',
-              onPressed: () {},
+              onPressed: () {
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WebFF(
+                      title: 'Privacy Policy',
+                      url: DocFF.pP,
+                    ),
+                  ),
+                );
+              },
             ),
             SizedBox(height: 16.h),
             SetItWid(
               text: 'Terms of Use',
-              onPressed: () {},
+              onPressed: () {
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WebFF(
+                      title: 'Terms of Use',
+                      url: DocFF.tUse,
+                    ),
+                  ),
+                );
+              },
             ),
             SizedBox(height: 16.h),
             SetItWid(
               text: 'Support',
-              onPressed: () {},
+              onPressed: () {
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WebFF(
+                      title: 'Support',
+                      url: DocFF.s,
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),

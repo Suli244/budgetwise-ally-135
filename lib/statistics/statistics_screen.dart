@@ -68,7 +68,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(360, 890));
+    // ScreenUtil.init(context, designSize: const Size(360, 890));
     return Scaffold(
       appBar: AppBar(
         title: Padding(
