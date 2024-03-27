@@ -1,8 +1,9 @@
+import 'package:apphud/apphud.dart';
 import 'package:budgetwise_ally_135/calculator/logic/cubits/get_calculator_cubit/get_calculator_cubit.dart';
 import 'package:budgetwise_ally_135/calculator/logic/models/calculator_model.dart';
 import 'package:budgetwise_ally_135/calculator/logic/repositories/calculator_repo.dart';
 import 'package:budgetwise_ally_135/core/ba_colors.dart';
-import 'package:budgetwise_ally_135/settings/budgetwise_ally_adapsas.dart';
+import 'package:budgetwise_ally_135/core/urls.dart';
 import 'package:budgetwise_ally_135/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +12,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await BudgetwiseAllyAdapty().initializeBudgetwiseAllyAdapty();
   await Hive.initFlutter();
   Hive.registerAdapter(CalculatorHiveModelAdapter());
   runApp(const MyApp());
+  await Apphud.start(apiKey: DocFF.vsbsda);
 }
 
 class MyApp extends StatelessWidget {
